@@ -20,7 +20,6 @@ extension UIViewController {
         let minLat = max(lat - FlickrConstants.Flickr.SearchBBoxHalfHeight, FlickrConstants.Flickr.SearchLatRange.0)
         let maxLon = min(long + FlickrConstants.Flickr.SearchBBoxHalfWidth, FlickrConstants.Flickr.SearchLonRange.1)
         let minLon = max(long - FlickrConstants.Flickr.SearchBBoxHalfWidth, FlickrConstants.Flickr.SearchLonRange.0)
-        
         let coordinatesString: String = String(minLon) + "," + String(minLat) + "," + String(maxLon) + "," + String(maxLat)
         
         return coordinatesString
