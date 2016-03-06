@@ -241,6 +241,9 @@ extension PhotosCollectionViewController {
         if fetchedResultController.fetchedObjects?.count == 0 {
             noImagesFoundLabel.hidden = false
         }
+        else {
+            noImagesFoundLabel.hidden = true
+        }
     }
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
