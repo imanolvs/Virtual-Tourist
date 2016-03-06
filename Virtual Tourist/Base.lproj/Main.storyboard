@@ -112,6 +112,13 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <label key="backgroundView" hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Images Available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qiy-7f-aq0">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="395"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="31"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PictureCollecionViewCell" id="QiY-UH-Lc4" customClass="PictureCollecionViewCell" customModule="Virtual_Tourist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="131" height="108"/>
@@ -201,6 +208,7 @@
                         <outlet property="flowLayout" destination="x10-Q8-4T0" id="bL7-2K-Pma"/>
                         <outlet property="mapView" destination="gia-kz-T6z" id="xh5-Qs-E84"/>
                         <outlet property="newCollectionButton" destination="MgK-Oo-mf4" id="AAF-oK-tQr"/>
+                        <outlet property="noImagesFoundLabel" destination="Qiy-7f-aq0" id="Zts-Wf-ngU"/>
                         <outlet property="sharePicturesButton" destination="T8i-Re-Zts" id="boY-aR-1aR"/>
                         <outlet property="trashButton" destination="8RK-4X-Y4E" id="sri-bV-nlM"/>
                     </connections>

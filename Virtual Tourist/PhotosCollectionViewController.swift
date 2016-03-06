@@ -19,6 +19,7 @@ class PhotosCollectionViewController : UIViewController, UICollectionViewDataSou
     @IBOutlet weak var newCollectionButton : UIBarButtonItem!
     @IBOutlet weak var trashButton: UIBarButtonItem!
     @IBOutlet weak var sharePicturesButton: UIBarButtonItem!
+    @IBOutlet weak var noImagesFoundLabel: UILabel!
     
     var isSelectingPicures: Bool = false
     var pin: Pin!
@@ -60,6 +61,9 @@ class PhotosCollectionViewController : UIViewController, UICollectionViewDataSou
         if fetchedResultController.fetchedObjects?.count > 0 {
             performUIUpdates { self.newCollectionButton.enabled = false }
         }
+        else {
+            performUIUpdates { self.noImagesFoundLabel.hidden = false }
+        }
         
         performUIUpdates {
             self.mapView.addAnnotation(self.pin)
@@ -89,6 +93,7 @@ class PhotosCollectionViewController : UIViewController, UICollectionViewDataSou
     @IBAction func newCollectionUpdate(sender: UIBarButtonItem) {
 
         newCollectionButton.enabled = false
+        noImagesFoundLabel.hidden = true
         deletePhotos()
         collectionView.reloadData()
         
@@ -96,6 +101,7 @@ class PhotosCollectionViewController : UIViewController, UICollectionViewDataSou
             
             if success == false {
                 print(error)
+                performUIUpdates{ self.noImagesFoundLabel.hidden = false }
             }
             performUIUpdates { self.newCollectionButton.enabled = true }
         }
@@ -231,6 +237,10 @@ extension PhotosCollectionViewController {
             }
             
             }, completion: nil)
+        
+        if fetchedResultController.fetchedObjects?.count == 0 {
+            noImagesFoundLabel.hidden = false
+        }
     }
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
@@ -261,7 +271,6 @@ extension PhotosCollectionViewController {
             performUIUpdates {
                 cell.activityIndicator.stopAnimating()
                 cell.imageView.image = picture.image
-                self.newCollectionButton.enabled = true
             }
         }
         else {
@@ -280,7 +289,6 @@ extension PhotosCollectionViewController {
                     performUIUpdates {
                         cell.activityIndicator.stopAnimating()
                         cell.imageView.image = image
-                        self.newCollectionButton.enabled = true
                     }
                 }
             }
