@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C5CB03F1C8D874000AEA0DF /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5CB03E1C8D874000AEA0DF /* ImageCache.swift */; };
 		2C8B02B81C8C893700C36ECD /* MapRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8B02B71C8C893700C36ECD /* MapRegion.swift */; };
 		2CDFA4141C88479B002485BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDFA4131C88479B002485BF /* AppDelegate.swift */; };
 		2CDFA4161C88479B002485BF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDFA4151C88479B002485BF /* MapViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C5CB03E1C8D874000AEA0DF /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		2C8B02B71C8C893700C36ECD /* MapRegion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapRegion.swift; sourceTree = "<group>"; };
 		2CDFA4101C88479B002485BF /* Virtual Tourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Virtual Tourist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CDFA4131C88479B002485BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				2C8B02B71C8C893700C36ECD /* MapRegion.swift */,
 				2CDFA4261C8848F3002485BF /* Pin.swift */,
 				2CDFA4281C884A0B002485BF /* Picture.swift */,
+				2C5CB03E1C8D874000AEA0DF /* ImageCache.swift */,
 				2CDFA42A1C884B03002485BF /* Flickr */,
 			);
 			name = Model;
@@ -204,6 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C5CB03F1C8D874000AEA0DF /* ImageCache.swift in Sources */,
 				2CDFA4361C88D03D002485BF /* PictureCollecionViewCell.swift in Sources */,
 				2CDFA4411C89CEA0002485BF /* ViewControllerExtension.swift in Sources */,
 				2CDFA4321C88BD63002485BF /* GCDBlackBox.swift in Sources */,

@@ -76,23 +76,44 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
         }
     }
     
+    var firstDrop : Bool = true
+    var annotation = MKPointAnnotation()
     // MARK: Try to add a pin when a Long Press Gesture is performed
     @IBAction func longpressAddAnnotation(sender: UILongPressGestureRecognizer) {
 
-        if sender.state != UIGestureRecognizerState.Began { return }
         if tapPinToDelete == true { return }
-        let point = sender.locationInView(self.mapView)
-        let location : CLLocationCoordinate2D = mapView.convertPoint(point, toCoordinateFromView: self.mapView)
-        let annotation = MKPointAnnotation()
-        
-        annotation.coordinate = location
-        mapView.addAnnotation(annotation)
-        
-        let dictionary = [Pin.Keys.Latitude : location.latitude,
-            Pin.Keys.Longitude : location.longitude]
-        let pin = Pin(dictionary: dictionary, context: sharedContext)
-        getPicturesFromFlickr(pin)
-        CoreDataStackManager.sharedInstance().saveContext()
+
+        switch sender.state {
+        case .Began:
+            firstDrop = true
+            let point = sender.locationInView(self.mapView)
+            let location : CLLocationCoordinate2D = mapView.convertPoint(point, toCoordinateFromView: self.mapView)
+            let annotation = MKPointAnnotation()
+            
+            annotation.coordinate = location
+            mapView.addAnnotation(annotation)
+            self.annotation = annotation
+        case .Changed:
+            firstDrop = false
+            mapView.removeAnnotation(self.annotation)
+
+            let point = sender.locationInView(self.mapView)
+            let location : CLLocationCoordinate2D = mapView.convertPoint(point, toCoordinateFromView: self.mapView)
+            let annotation = MKPointAnnotation()
+            
+            annotation.coordinate = location
+            mapView.addAnnotation(annotation)
+            self.annotation = annotation
+        case .Ended:
+            firstDrop = false
+            let dictionary = [Pin.Keys.Latitude : self.annotation.coordinate.latitude,
+                Pin.Keys.Longitude : self.annotation.coordinate.longitude]
+            let pin = Pin(dictionary: dictionary, context: sharedContext)
+            getPicturesFromFlickr(pin)
+            CoreDataStackManager.sharedInstance().saveContext()
+        default:
+            break
+        }
     }
     
     // MARK: Method for restoring Fetched Pins and the Map Region
@@ -117,16 +138,12 @@ extension MapViewController {
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseID = "pin"
-        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseID) as? MKPinAnnotationView
+        let pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
         
-        if pinView == nil {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
-            pinView!.canShowCallout = false
-            pinView!.animatesDrop = true
-            pinView!.pinTintColor = UIColor.redColor()
-        } else {
-            pinView!.annotation = annotation
-        }
+        pinView.pinTintColor = UIColor.redColor()
+        pinView.draggable = false
+        pinView.canShowCallout = false
+        firstDrop ? (pinView.animatesDrop = true) : (pinView.animatesDrop = false)
         
         return pinView
     }

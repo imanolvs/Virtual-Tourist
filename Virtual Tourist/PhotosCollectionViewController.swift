@@ -58,10 +58,7 @@ class PhotosCollectionViewController : UIViewController, UICollectionViewDataSou
             try fetchedResultController.performFetch()
         } catch { print(error) }
         
-        if fetchedResultController.fetchedObjects?.count > 0 {
-            performUIUpdates { self.newCollectionButton.enabled = false }
-        }
-        else {
+        if fetchedResultController.fetchedObjects?.count == 0 {
             performUIUpdates { self.noImagesFoundLabel.hidden = false }
         }
         
@@ -138,6 +135,7 @@ class PhotosCollectionViewController : UIViewController, UICollectionViewDataSou
         selectedIndexes.removeAll()
         for indexPath in cloneSelectedIndexes {
             let object = fetchedResultController.objectAtIndexPath(indexPath) as! Picture
+            ImageCache.sharedInstance().removeImage(object.imagePath)
             sharedContext.deleteObject(object)
         }
         CoreDataStackManager.sharedInstance().saveContext()
@@ -263,7 +261,7 @@ extension PhotosCollectionViewController {
 
 extension PhotosCollectionViewController {
     
-    //MARK: Method forr configuring the collection view cells
+    //MARK: Method for configuring the collection view cells
     private func configureCell(cell: PictureCollecionViewCell, withPicture picture: Picture, indexPath: NSIndexPath) {
         
         cell.imageView.contentMode = .ScaleToFill
@@ -336,7 +334,8 @@ extension PhotosCollectionViewController {
     private func deletePhotos() {
         
         for object in fetchedResultController.fetchedObjects! {
-            let obj = object as! NSManagedObject
+            let obj = object as! Picture
+            ImageCache.sharedInstance().removeImage(obj.imagePath)
             sharedContext.deleteObject(obj)
         }
         CoreDataStackManager.sharedInstance().saveContext()
