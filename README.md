@@ -8,7 +8,7 @@ Steps to import, build and run the project:
 - Clone the repository using the following command: 
 
 ```
-$ git clone https://github.com/imanolvs/Places-Finder.git
+$ git clone https://github.com/imanolvs/Virtual-Tourist.git
 ```
 - Open the project (`Places Finder.xcodeproj` file)
 - Build the project: 
